@@ -96,7 +96,10 @@ Created 2026-11-15.
 | E-05 | **Adds to E-01: a rollback loses data.** The old binary reads new files, but its first save (any add, reserve or sale) rewrites the whole file with its own format, so every customer's fleet flag and every invoice's `fleet_disc` are **silently dropped**. After rolling back (RELEASE.txt step 6) and then re-deploying, fleet customers must be flagged again, and the fleet line on invoices made before the rollback is gone. `disc` and the totals stay correct. | Document this in the release notes / NOTES.md. Option: back up `data/` before deploying. **Decided 2026-11-15:** document the risk in the release notes and `NOTES.md`, and add a "back up `data/` before deploying" step to the release checklist as an appended, dated section at the bottom of `RELEASE.txt` (never editing its existing text). | confirmed |
 | E-06 | **Adds to E-02.** Files are **already** not byte-stable today: any save drops `#` comment lines and blank lines and rewrites every amount with `%.2f`. A "byte-identical until a fleet record exists" requirement could not be met even without the new field. | Compare files by parsed values, not bytes, in tests. | assumed |
 
-## F. Delivery pipeline (spec 001)
+## F. Build, tests, CI and release (specs 001 and 003)
+
+Split 2026-11-15: F-01 to F-04 and F-07 belong to `001-build-and-tests`; F-05 and F-06
+belong to `003-ci-and-release`; F-08 and F-09 apply to the whole effort. IDs are unchanged.
 
 | ID | Assumption | Status |
 |----|-----------|--------|

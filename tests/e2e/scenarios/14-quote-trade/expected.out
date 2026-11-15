@@ -1,0 +1,111 @@
+==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : Marlow Motors Ltd (Trade)
+  Vehicle  : KX21 BUY Kia Sportage 1.6 GDi 3
+  ----------------------------------------------
+  List price                   25495.00
+  Trade discount               -2549.50
+  Discount (15.0%)             -3441.83
+  Net price                    19503.67
+  Delivery                       150.00
+  VAT 20%                       3930.73
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        23639.40
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : A1 Car Sales (Trade)
+  Vehicle  : PO21 MMV Hyundai Tucson 1.6 T-GDi SE
+  ----------------------------------------------
+  List price                   22995.00
+  Trade discount               -2299.50
+  Net price                    20695.50
+  Delivery                       150.00
+  VAT 20%                       4169.10
+  Registration fee                55.00
+  Trade-in                     -1000.00
+  ==============================================
+  TOTAL                        24069.60
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : Marlow Motors Ltd (Trade)
+  Vehicle  : GJ19 VLA Skoda Octavia Estate 2.0 TDI SE
+  ----------------------------------------------
+  List price                   12750.00
+  Trade discount               -1275.00
+  Discount (15.0%)             -1721.25
+  Net price                     9753.75
+  Delivery                       150.00
+  VAT 20%                       1980.75
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        11939.50
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: 
+  Goodbye.
+[exit status: 0]

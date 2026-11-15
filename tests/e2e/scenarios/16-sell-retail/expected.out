@@ -1,0 +1,91 @@
+==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 Sell Vehicle
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  INVOICE PREVIEW
+  ----------------------------------------------
+  Customer : Sarah Whitfield (Retail)
+  Vehicle  : BD68 KWP Volkswagen Golf 1.5 TSI Life
+  ----------------------------------------------
+  List price                   15995.00
+  Discount ( 5.0%)              -799.75
+  Net price                    15195.25
+  Delivery                       150.00
+  VAT 20%                       3069.05
+  Registration fee                55.00
+  Trade-in                     -2000.00
+  ==============================================
+  TOTAL                        16469.30
+
+  Confirm sale (Y/N)? 
+  Invoice 50233 created.
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  NO     DATE       VEH    CUSTOMER                          TOTAL
+  ----------------------------------------------------------------
+  50230  2021-02-11 1009   David Okafor                    9331.30
+  50231  2021-03-02 1012   Marlow Motors Ltd              14809.60
+  50232  2021-03-29 1001   Greenway Taxis                 11821.48
+  50233  <TODAY> 1003   Sarah Whitfield                16469.30
+
+  4 invoice(s)
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: 
+  Goodbye.
+[exit status: 0]

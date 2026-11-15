@@ -1,0 +1,129 @@
+==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 View Invoice
+==============================================================
+
+  Invoice no : 
+  INVOICE 50230    Date: 2021-02-11
+  ----------------------------------------------
+  Customer : David Okafor
+  Vehicle  : DE18 PQR Peugeot 308 1.2 PureTech Allure
+  ----------------------------------------------
+  List price                    9295.00
+  Discounts                     -464.75
+  Net price                     8830.25
+  Fees                           205.00
+  VAT                           1796.05
+  Trade-in                     -1500.00
+  ==============================================
+  TOTAL                         9331.30
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 View Invoice
+==============================================================
+
+  Invoice no : 
+  INVOICE 50231    Date: 2021-03-02
+  ----------------------------------------------
+  Customer : Marlow Motors Ltd
+  Vehicle  : EF66 TRX Mercedes-Benz C220d AMG Line
+  ----------------------------------------------
+  List price                   13495.00
+  Discounts                    -1349.50
+  Net price                    12145.50
+  Fees                           205.00
+  VAT                           2459.10
+  ==============================================
+  TOTAL                        14809.60
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 View Invoice
+==============================================================
+
+  Invoice no : 
+  INVOICE 50232    Date: 2021-03-29
+  ----------------------------------------------
+  Customer : Greenway Taxis
+  Vehicle  : LK19 XRT Ford Fiesta 1.0 EcoBoost Zetec
+  ----------------------------------------------
+  List price                   10495.00
+  Discounts                     -839.60
+  Net price                     9655.40
+  Fees                           205.00
+  VAT                           1961.08
+  ==============================================
+  TOTAL                        11821.48
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 View Invoice
+==============================================================
+
+  Invoice no : 
+  Invoice not found.
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: 
+  Goodbye.
+[exit status: 0]

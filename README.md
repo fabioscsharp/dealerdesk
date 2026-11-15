@@ -77,3 +77,18 @@ See RELEASE.txt
 
 
 Problems: ask Phil (ext. 214).
+
+
+## Build and test (added 2026-11-16)
+
+This section was added later. It supersedes both build commands above. The QUICK START
+command still works; the BUILD command (with `report.c`) does not (see assumptions.md B-10).
+
+From the repository root, on Linux, macOS or WSL with gcc or clang and `make`:
+
+    make                # builds ./dealerdesk
+    make test           # builds, then runs the unit and end-to-end tests
+    make clean          # removes build outputs
+
+`make test` never touches `data/`: every test runs on a temporary copy. See
+`tests/README.md` for how the tests work and how to add one.

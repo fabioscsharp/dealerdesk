@@ -1,0 +1,139 @@
+==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : Sarah Whitfield (Retail)
+  Vehicle  : yf20 hbn Vauxhall Corsa 1.2 SE
+  ----------------------------------------------
+  List price                   10995.00
+  Net price                    10995.00
+  Delivery                       150.00
+  VAT 20%                       2229.00
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        13429.00
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : Sarah Whitfield (Retail)
+  Vehicle  : BD68 KWP Volkswagen Golf 1.5 TSI Life
+  ----------------------------------------------
+  List price                   15995.00
+  Discount ( 5.0%)              -799.75
+  Net price                    15195.25
+  Delivery                       150.00
+  VAT 20%                       3069.05
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        18469.30
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : David Okafor (Retail)
+  Vehicle  : WR21 OLC Toyota Yaris 1.5 Hybrid Icon
+  ----------------------------------------------
+  List price                   16750.00
+  Discount (10.0%)             -1675.00
+  Net price                    15075.00
+  Delivery                       150.00
+  VAT 20%                       3045.00
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        18325.00
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : Hannah Price (Retail)
+  Vehicle  : ma17 zzt BMW 320d M Sport
+  ----------------------------------------------
+  List price                   15450.00
+  Discount (15.0%)             -2317.50
+  Net price                    13132.50
+  Delivery                       150.00
+  VAT 20%                       2656.50
+  Registration fee                55.00
+  Trade-in                     -2500.00
+  ==============================================
+  TOTAL                        13494.00
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: 
+  Goodbye.
+[exit status: 0]

@@ -1,0 +1,3 @@
+dealerdesk
+*.o
+tests/unit/test_calc

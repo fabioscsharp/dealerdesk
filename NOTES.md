@@ -1,17 +1,63 @@
 # DealerDesk delivery notes
 
-This document is kept to at most two pages (BRIEF). It grows as the work is delivered. The
-specs and plans are in the workspace repository, under `specs/`.
+ The agent setup (`CLAUDE.md`, the constitution, the specs and the
+spec-kit skills) is in the companion repository `fabioscsharp/workspace`, which holds this
+repository as a submodule: clone it with `--recursive`. Every decision below has an ID in
+`assumptions.md`.
+
+I used spec-kit (Spec Driven Development) to organize the workflow for this challenge.
+
+## What I changed, and why in this order
+
+1. **Tests first (spec 001).** A `Makefile` and a characterization suite: 40 unit cases on
+   `calc_quote`/`rnd2` and 29 end-to-end scenarios that drive the real binary through stdin on
+   a temporary data copy, with output and data files compared byte for byte. Why first: "unchanged  
+   to the penny" can only be proved with tests taken from  the old code, and every other change 
+   depends on it.
+2. **TICKET-142 through that suite (spec 002).** Fleet customers get 4% off the vehicle price,
+   fees excluded, as its own line. Two trailing fields (`customers.dat` 6th, `invoices.dat`
+   12th), so old files load unchanged. Shipped as v2.4; the 10 existing goldens that changed
+   were checked to differ only by the approved menu line.
+3. **CI and release (spec 003).** `scripts/check.sh` is the one list of checks; `ci.yml` runs it
+   with gcc and clang, and `build-and-test` is the required check on `master`. `release.yml` 
+   builds a versioned zip (binary and sample data) with a SHA256 file.
+
+
+## How I worked with the agent
+
+Claude Code with spec-kit: constitution, a baseline spec reverse-engineered from the code, then
+specify, clarify, plan, tasks, analyze, implement for each change. Rules live in `CLAUDE.md`.
+Where it got things wrong:
+
+- **AI used the claude.md to hold architecture** and requirements related to the application when it should only hold agent's guidance
+- **First CI plan ignored the rules.** It proposed fixing README and `RELEASE.txt` (the docs are
+  append-only) and a Windows and file-server deploy that spec 003 puts out of scope. I caught
+  it by checking the plan against the spec, and it was re-planned.
+- **A pull request was opened by mistake against the original repository** (based on a link generated 
+  by the agen) and was closed within minutes, with a comment.
+
+## Assumptions (full list in `assumptions.md`)
+
+- Code and data beat the docs: the README, help text and `RELEASE.txt` disagree with the code (B-01 to B-11).
+- Fleet pricing: 4% of the list price after the trade discount, outside the 15% salesman cap
+  (D-01 to D-05). A rollback to the old binary silently drops fleet data on its first save (E-05).
+- v2.4 is the fleet release, so the header changes from v2.3 (B-06).
+- The supported platform is Linux, so the released binary is Linux only (F-02, F-24). The
+  Borland release process is out of reach.
+- The version has one source, the header in `screen.c` (F-26). The existing `2.4` tag is used as is (F-32).
+
+## What I would do next
+
+- A **Windows build** (F-31): a smoke-tested MinGW build first, then CRLF-aware goldens, then
+  parity with the Borland release, which needs the old binary or a pilot showroom.
+- Release `2.4` itself: an empty Release "V 2.4" already exists and the workflow refuses to touch it.
+- Pin the actions to commit SHAs, and stop admins bypassing the required check.
+- Cover the orphan-invoice fallbacks (F-20), and automate the showroom notification.
 
 ## Rollback risk (v2.4)
 
-v2.4 adds a trailing field to two data files: the fleet flag (6th field of
-`customers.dat`) and the fleet discount (12th field of `invoices.dat`).
-
-- The previous binary (`dealerdesk.old`, v2.3) **reads** v2.4 files correctly and shows
-  correct totals. `make test-compat` checks this.
-- Its **first save** (any add, reserve or sale) rewrites the files in the v2.3 format, so
-  every fleet flag and every invoice fleet amount is silently lost (assumption E-05).
-- Mitigation: back up `data/` before deploying (see the 2.4 section in `RELEASE.txt`).
-  After a rollback, restore that backup before re-deploying 2.4, or re-flag the fleet
-  customers through Customers > 4.
+The previous binary (`dealerdesk.old`, v2.3) reads v2.4 files correctly (`make test-compat`), but
+its **first save** rewrites them in the old format and silently drops every fleet flag and every
+invoice fleet amount (E-05). Back up `data/` before deploying (`RELEASE.txt`, `RELEASING.md`);
+after a rollback restore that backup, or re-flag fleet customers through Customers, then 4. Easy to mitigate with 
+AI assitance.

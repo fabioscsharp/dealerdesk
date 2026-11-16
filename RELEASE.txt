@@ -10,3 +10,22 @@ HOW TO RELEASE DEALERDESK
 6. If something breaks, copy dealerdesk.old back
 
 Last release: 2.3 (2021-04-08)  - P.
+
+
+ADDED 2026-11-16: RELEASE 2.4 (fleet discount, TICKET-142)
+==========================================================
+
+Before step 1 above, BACK UP THE DATA: copy the whole data folder on the file server
+(customers.dat, invoices.dat, stock.dat, next_ids.dat) somewhere safe.
+
+Build with `make` and run `make test` instead of "test it a bit" (see README, Build and test).
+
+ROLLBACK WARNING for 2.4: dealerdesk.old (2.3) can read the 2.4 data files, but the first
+time it saves anything (adding, reserving or selling) it rewrites the files in the old
+format. That silently drops:
+  - every customer's fleet flag
+  - the fleet discount amount on every invoice (totals stay correct)
+After a rollback, either restore the backup taken above before going back to 2.4, or
+flag the fleet customers again (Customers > 4) once 2.4 is back.
+
+Release: 2.4

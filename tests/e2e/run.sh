@@ -6,7 +6,8 @@
 # Each directory tests/e2e/scenarios/NN-name/ holds:
 #   input           keystrokes fed to the binary on stdin (required)
 #   expected.out    golden output, normalised (required)
-#   fixture         optional: sample (default, the repo data/), empty, full
+#   fixture         optional: sample (default, the repo data/), empty, full, or the
+#                   name of a committed directory tests/e2e/fixtures/<name>/ (spec 002)
 #   expected-data/  optional: golden data/*.dat after the run, normalised;
 #                   when absent the data must be byte-identical to the fixture
 #
@@ -55,7 +56,11 @@ make_fixture() {
         sample) cp "$ROOT"/data/*.dat "$2"/ ;;
         empty)  : ;;
         full)   sh "$HERE/fixtures/make-full.sh" "$2" ;;
-        *)      echo "unknown fixture: $1" >&2; return 1 ;;
+        *)      if [ -n "$1" ] && [ -d "$HERE/fixtures/$1" ]; then
+                    cp "$HERE/fixtures/$1"/*.dat "$2"/
+                else
+                    echo "unknown fixture: $1" >&2; return 1
+                fi ;;
     esac
 }
 
@@ -97,7 +102,7 @@ for dir in "$HERE"/scenarios/${SCENARIO:-*}/ ; do
     [ -f "$dir/input" ] || continue
     name=$(basename "$dir")
     fixture=sample
-    [ -f "$dir/fixture" ] && fixture=$(head -n 1 "$dir/fixture" | tr -cd 'a-z')
+    [ -f "$dir/fixture" ] && fixture=$(head -n 1 "$dir/fixture" | tr -cd 'a-z0-9-')
 
     rm -rf "$tmp"/*
     make_fixture "$fixture" "$tmp/run/data" || exit 2

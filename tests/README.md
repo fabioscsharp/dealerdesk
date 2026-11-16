@@ -14,6 +14,7 @@ POSIX tools only):
     make e2e                       # end-to-end scenarios only
     make e2e SCENARIO='16-*'       # one scenario (shell glob)
     make test-mutation             # proves a wrong VAT constant makes the suite fail
+    make test-compat               # the a2ba708 binary still reads v2.4 data (needs git)
 
 The repository's `data/` is never written: every scenario runs on a temporary copy.
 
@@ -23,13 +24,18 @@ The repository's `data/` is never written: every scenario runs on a temporary co
     tests/e2e/run.sh               scenario runner
     tests/e2e/normalise.sh         output/data normalisation
     tests/e2e/fixtures/make-full.sh  generates tables at capacity (fixture "full")
+    tests/e2e/fixtures/fleet/      sample data with 1001/1012 in stock, 2008 and 2002 fleet
+    tests/e2e/fixtures/legacy-gaps/  empty-field rows, old 5/11-field rows, odd flag value
     tests/e2e/scenarios/NN-name/   input, expected.out, [fixture], [expected-data/]
+    tests/e2e/check-rebaseline.sh  one-off proof that spec 002 re-baselines are approved
     tests/mutation.sh              mutation check used by make test-mutation
+    tests/compat.sh                old-binary read check used by make test-compat
 
 ## How a scenario works
 
 1. A temporary directory is created. It gets a `data/` copy of the fixture: `sample`
-   (the repo `data/`, the default), `empty` (no files) or `full` (500 vehicles, 500
+   (the repo `data/`, the default), `empty` (no files), a committed directory
+   `tests/e2e/fixtures/<name>/` (`fleet`, `legacy-gaps`), or `full` (500 vehicles, 500
    customers, 2000 invoices).
 2. `input` is fed to `dealerdesk` on stdin, running in that directory. stdin is a
    file, so the app always ends (EOF exits with status 0). The exit status is
@@ -53,6 +59,7 @@ The repository's `data/` is never written: every scenario runs on a temporary co
 - Generate the golden with `make golden SCENARIO='NN-*'`, then **read** `expected.out`
   against the code before committing. Never hand-edit goldens.
 - `make golden` refuses to run when the sources or sample data differ from `a2ba708`.
+  Since spec 002 changed the sources, every new or re-baselined scenario needs `FORCE=1`.
   Once a spec has approved a behaviour change (for example 002 fleet discount), use
   `FORCE=1 make golden SCENARIO=...` and review the diff of every regenerated file.
 - Add the scenario to the coverage table below.
@@ -71,21 +78,21 @@ the actual values in table syntax. Paste them, then review.
 | BR-012 | find by plate, exact and case-sensitive | 07 |
 | BR-013 | change price, ≤ 0 rejected, unknown id | 08 |
 | BR-014 | reserve / release, SOLD refused | 09 |
-| BR-020 | list customers, Trade/Retail label | 10 |
-| BR-021 | add customer, name required, trade flag | 11 |
+| BR-020 | list customers, Trade/Retail label, `, Fleet` marker | 10, 23, 24, 28 |
+| BR-021 | add customer, name required, trade and fleet flags | 11, 24 |
 | BR-022 | find customer, case-sensitive substring | 12 |
-| BR-023 | no edit/delete customer | 10 (customer menu golden) |
+| BR-023 | no edit/delete customer; Set fleet status (Y, N, other, unknown id) | 10, 23 |
 | BR-030 | quote prompts and errors | 13, 14, 15 |
 | BR-031 | pricing from current list price | 13, 14 (and 08 changes a price) |
-| BR-032 | quote layout | 13, 14 |
+| BR-032 | quote layout, Fleet discount line | 13, 14, 25 |
 | BR-033 | sell preview and confirmation, cancel | 16, 17, 18 |
-| BR-034 | invoice created, vehicle SOLD, counters | 16, 17 (expected-data) |
-| BR-040..047 | pricing rules | unit `test_calc`; 13, 14, 16, 17 |
-| BR-050 | invoice record format | 16, 17 (expected-data/invoices.dat) |
+| BR-034 | invoice created, vehicle SOLD, counters, fleet amount stored | 16, 17, 26, 27 (expected-data) |
+| BR-040..047 | pricing rules incl. fleet step | unit `test_calc` (40 cases); 13, 14, 16, 17, 25, 27 |
+| BR-050 | invoice record format (12 fields) | 16, 17, 26, 27 (expected-data/invoices.dat) |
 | BR-051 | list invoices with count | 16, 19 |
-| BR-052 | view invoice, not found | 17, 20 |
-| BR-060 | help screen (stale text pinned as-is) | 04 |
-| BR-070 | data in ./data, missing file = empty table | 21; every writing scenario |
+| BR-052 | view invoice, not found, fleet invoice lines | 17, 20, 26, 27, 28, 29 |
+| BR-060 | help screen (stale text pinned as-is, plus the fleet line) | 04 |
+| BR-070 | data in ./data, missing file = empty table, empty fields kept, old rows load | 21, 28; every writing scenario; `make test-compat` |
 | BR-080 | single user, no locking | not testable: nothing to assert |
 | BR-081 | capacity limits | 22 |
 | BR-082 | no tests / manual build | superseded by this suite and the Makefile |
@@ -95,3 +102,5 @@ the actual values in table syntax. Paste them, then review.
 data has no such invoice, and no fixture creates one yet.
 
 Other paths: 03 covers EOF in the middle of a prompt. `make test-mutation` covers SC-004.
+Spec 002 (fleet): 23-29, plus re-baselined 02, 04, 10, 11, 12, 16, 17, 21, 22 (checked by
+`tests/e2e/check-rebaseline.sh`).

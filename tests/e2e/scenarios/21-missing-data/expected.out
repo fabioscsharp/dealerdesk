@@ -81,6 +81,7 @@
   1. List customers
   2. Add customer
   3. Find customer
+  4. Set fleet status
   0. Back
 
   Option: ==============================================================
@@ -99,6 +100,7 @@
   1. List customers
   2. Add customer
   3. Find customer
+  4. Set fleet status
   0. Back
 
   Option: ==============================================================

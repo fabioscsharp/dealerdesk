@@ -18,6 +18,30 @@ static void cpy(char *d, const char *s, int n)
     d[n - 1] = 0;
 }
 
+/*
+ * next_field - split on every '|', keeping empty fields (TICKET-142, E-04).
+ * Returns the field at *p (possibly ""), NUL-terminates it and moves *p past the
+ * '|'. Returns NULL once the line is used up, so a missing trailing field reads as
+ * NULL and gets its default. strtok() is not used here because it merges "||" and
+ * shifts every later field (C-16).
+ */
+static char *next_field(char **p)
+{
+    char *f, *bar;
+
+    if (*p == NULL)
+        return NULL;
+    f = *p;
+    bar = strchr(f, '|');
+    if (bar) {
+        *bar = 0;
+        *p = bar + 1;
+    } else {
+        *p = NULL;
+    }
+    return f;
+}
+
 static void load_stock(void)
 {
     FILE *f;
@@ -63,7 +87,7 @@ static void load_customers(void)
 {
     FILE *f;
     char line[512];
-    char *t;
+    char *t, *p;
     CUSTOMER *c;
 
     ncust = 0;
@@ -75,18 +99,19 @@ static void load_customers(void)
         if (line[0] == 0 || line[0] == '#')
             continue;
         c = &cust[ncust];
-        t = strtok(line, "|");
-        if (!t)
-            continue;
+        p = line;
+        t = next_field(&p);
         c->id = atoi(t);
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         cpy(c->name, t, sizeof c->name);
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         cpy(c->phone, t, sizeof c->phone);
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         cpy(c->email, t, sizeof c->email);
-        t = strtok(NULL, "|");
-        c->type = t ? t[0] : 'R';
+        t = next_field(&p);
+        c->type = (t && t[0]) ? t[0] : 'R';
+        t = next_field(&p);
+        c->fleet = (t && strcmp(t, "1") == 0) ? 1 : 0;
         ncust++;
     }
     fclose(f);
@@ -96,7 +121,7 @@ static void load_invoices(void)
 {
     FILE *f;
     char line[512];
-    char *t;
+    char *t, *p;
     INVOICE *i;
 
     ninv = 0;
@@ -108,30 +133,31 @@ static void load_invoices(void)
         if (line[0] == 0 || line[0] == '#')
             continue;
         i = &inv[ninv];
-        t = strtok(line, "|");
-        if (!t)
-            continue;
+        p = line;
+        t = next_field(&p);
         i->no = atoi(t);
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         cpy(i->date, t, sizeof i->date);
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->veh_id = t ? atoi(t) : 0;
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->cust_id = t ? atoi(t) : 0;
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->list = t ? atof(t) : 0;
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->disc = t ? atof(t) : 0;
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->net = t ? atof(t) : 0;
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->vat = t ? atof(t) : 0;
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->fees = t ? atof(t) : 0;
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->tradein = t ? atof(t) : 0;
-        t = strtok(NULL, "|");
+        t = next_field(&p);
         i->total = t ? atof(t) : 0;
+        t = next_field(&p);
+        i->fleet_disc = t ? atof(t) : 0;
         ninv++;
     }
     fclose(f);
@@ -190,9 +216,9 @@ void save_customers(void)
         return;
     }
     for (i = 0; i < ncust; i++)
-        fprintf(f, "%d|%s|%s|%s|%c\n",
+        fprintf(f, "%d|%s|%s|%s|%c|%d\n",
                 cust[i].id, cust[i].name, cust[i].phone, cust[i].email,
-                cust[i].type);
+                cust[i].type, cust[i].fleet);
     fclose(f);
 }
 
@@ -207,10 +233,10 @@ void save_invoices(void)
         return;
     }
     for (i = 0; i < ninv; i++)
-        fprintf(f, "%d|%s|%d|%d|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f\n",
+        fprintf(f, "%d|%s|%d|%d|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f\n",
                 inv[i].no, inv[i].date, inv[i].veh_id, inv[i].cust_id,
                 inv[i].list, inv[i].disc, inv[i].net, inv[i].vat,
-                inv[i].fees, inv[i].tradein, inv[i].total);
+                inv[i].fees, inv[i].tradein, inv[i].total, inv[i].fleet_disc);
     fclose(f);
 }
 

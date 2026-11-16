@@ -18,6 +18,7 @@
 
   - Plates are converted to upper case automatically.
   - Trade customers receive a 5% trade discount.
+  - Fleet customers receive an automatic 4% fleet discount.
   - Salesman discounts above 10% require a manager PIN.
   - Quotes are valid for 7 days.
   - A sold vehicle cannot be reserved or sold again.

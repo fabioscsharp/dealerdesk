@@ -1,0 +1,307 @@
+==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                    Customers
+==============================================================
+
+  1. List customers
+  2. Add customer
+  3. Find customer
+  4. Set fleet status
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                    Customers
+==============================================================
+
+  ID    NAME                       PHONE          EMAIL                        TYPE
+  -----------------------------------------------------------------------------------
+  2001  No Phone Ltd                              np@example.com               Trade
+  2002  No Email Fleet             07700 900001                                Retail, Fleet
+  2003  Odd Flag                   07700 900002   odd@example.com              Trade
+  2004  Old Row                    07700 900003   old@example.com              Retail
+  2005  Empty Type                 07700 900004   et@example.com               Retail, Fleet
+
+  5 customer(s)
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Customers
+==============================================================
+
+  1. List customers
+  2. Add customer
+  3. Find customer
+  4. Set fleet status
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : No Phone Ltd (Trade)
+  Vehicle  : yf20 hbn Vauxhall Corsa 1.2 SE
+  ----------------------------------------------
+  List price                   10995.00
+  Trade discount               -1099.50
+  Net price                     9895.50
+  Delivery                       150.00
+  VAT 20%                       2009.10
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        12109.60
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : No Email Fleet (Retail, Fleet)
+  Vehicle  : yf20 hbn Vauxhall Corsa 1.2 SE
+  ----------------------------------------------
+  List price                   10995.00
+  Fleet discount                -439.80
+  Net price                    10555.20
+  Delivery                       150.00
+  VAT 20%                       2141.04
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        12901.24
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : Odd Flag (Trade)
+  Vehicle  : yf20 hbn Vauxhall Corsa 1.2 SE
+  ----------------------------------------------
+  List price                   10995.00
+  Trade discount               -1099.50
+  Net price                     9895.50
+  Delivery                       150.00
+  VAT 20%                       2009.10
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        12109.60
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : Old Row (Retail)
+  Vehicle  : yf20 hbn Vauxhall Corsa 1.2 SE
+  ----------------------------------------------
+  List price                   10995.00
+  Net price                    10995.00
+  Delivery                       150.00
+  VAT 20%                       2229.00
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        13429.00
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                        Quote
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  QUOTATION (valid 7 days)
+  ----------------------------------------------
+  Customer : Empty Type (Retail, Fleet)
+  Vehicle  : yf20 hbn Vauxhall Corsa 1.2 SE
+  ----------------------------------------------
+  List price                   10995.00
+  Fleet discount                -439.80
+  Net price                    10555.20
+  Delivery                       150.00
+  VAT 20%                       2141.04
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        12901.24
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  NO     DATE       VEH    CUSTOMER                          TOTAL
+  ----------------------------------------------------------------
+  50300  2021-05-03 1002   No Phone Ltd                   12109.60
+  50301  2021-05-04 1002   No Email Fleet                 12901.24
+
+  2 invoice(s)
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 View Invoice
+==============================================================
+
+  Invoice no : 
+  INVOICE 50300    Date: 2021-05-03
+  ----------------------------------------------
+  Customer : No Phone Ltd
+  Vehicle  : yf20 hbn Vauxhall Corsa 1.2 SE
+  ----------------------------------------------
+  List price                   10995.00
+  Discounts                    -1099.50
+  Net price                     9895.50
+  Fees                           205.00
+  VAT                           2009.10
+  ==============================================
+  TOTAL                        12109.60
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 View Invoice
+==============================================================
+
+  Invoice no : 
+  INVOICE 50301    Date: 2021-05-04
+  ----------------------------------------------
+  Customer : No Email Fleet
+  Vehicle  : yf20 hbn Vauxhall Corsa 1.2 SE
+  ----------------------------------------------
+  List price                   10995.00
+  Discounts                        0.00
+  Fleet discount                -439.80
+  Net price                    10555.20
+  Fees                           205.00
+  VAT                           2141.04
+  ==============================================
+  TOTAL                        12901.24
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: 
+  Goodbye.
+[exit status: 0]

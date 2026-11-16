@@ -4,6 +4,7 @@
 #   make test            build, then run unit and end-to-end tests
 #   make unit | e2e      run one half of the suite
 #   make test-mutation   check that a wrong pricing constant makes the suite fail
+#   make test-compat     check that the a2ba708 binary still reads files written now
 #   make golden          regenerate e2e goldens (only for new or re-baselined scenarios)
 #   make clean           remove build outputs
 #
@@ -18,7 +19,7 @@ HDRS = calc.h dbfile.h globals.h screen.h
 
 UNIT = tests/unit/test_calc
 
-.PHONY: all test unit e2e golden test-mutation clean
+.PHONY: all test unit e2e golden test-mutation test-compat clean
 
 all: dealerdesk
 
@@ -43,6 +44,9 @@ test: all
 
 golden: dealerdesk
 	sh tests/e2e/run.sh --update ./dealerdesk
+
+test-compat:
+	sh tests/compat.sh
 
 test-mutation:
 	sh tests/mutation.sh

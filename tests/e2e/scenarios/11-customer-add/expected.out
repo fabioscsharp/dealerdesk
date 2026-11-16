@@ -17,13 +17,14 @@
   1. List customers
   2. Add customer
   3. Find customer
+  4. Set fleet status
   0. Back
 
   Option: ==============================================================
   DEALERDESK vX.Y                                 Add Customer
 ==============================================================
 
-  Name   :   Phone  :   Email  :   Trade customer (Y/N)? 
+  Name   :   Phone  :   Email  :   Trade customer (Y/N)?   Fleet customer (Y/N)? 
   Customer 2009 added.
 
   Press ENTER to continue...==============================================================
@@ -33,13 +34,14 @@
   1. List customers
   2. Add customer
   3. Find customer
+  4. Set fleet status
   0. Back
 
   Option: ==============================================================
   DEALERDESK vX.Y                                 Add Customer
 ==============================================================
 
-  Name   :   Phone  :   Email  :   Trade customer (Y/N)? 
+  Name   :   Phone  :   Email  :   Trade customer (Y/N)?   Fleet customer (Y/N)? 
   Customer 2010 added.
 
   Press ENTER to continue...==============================================================
@@ -49,13 +51,14 @@
   1. List customers
   2. Add customer
   3. Find customer
+  4. Set fleet status
   0. Back
 
   Option: ==============================================================
   DEALERDESK vX.Y                                 Add Customer
 ==============================================================
 
-  Name   :   Phone  :   Email  :   Trade customer (Y/N)? 
+  Name   :   Phone  :   Email  :   Trade customer (Y/N)?   Fleet customer (Y/N)? 
   Name is required.
 
   Press ENTER to continue...==============================================================
@@ -65,6 +68,7 @@
   1. List customers
   2. Add customer
   3. Find customer
+  4. Set fleet status
   0. Back
 
   Option: ==============================================================
@@ -93,6 +97,7 @@
   1. List customers
   2. Add customer
   3. Find customer
+  4. Set fleet status
   0. Back
 
   Option: ==============================================================

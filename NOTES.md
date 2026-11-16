@@ -20,7 +20,10 @@ I used spec-kit (Spec Driven Development) to organize the workflow for this chal
    were checked to differ only by the approved menu line.
 3. **CI and release (spec 003).** `scripts/check.sh` is the one list of checks; `ci.yml` runs it
    with gcc and clang, and `build-and-test` is the required check on `master`. `release.yml` 
-   builds a versioned zip (binary and sample data) with a SHA256 file.
+   builds a versioned zip (binary and sample data) with a SHA256 file. Release `2.4` was made
+   with it from the existing tag, after confirming the application and data on `master` equal
+   the tag. The first run was refused (an empty Release "V 2.4" already existed, which I deleted);
+   the next one stalled in GitHub's queue, and a retry published the zip, the checksum and the notes.
 
 
 ## How I worked with the agent
@@ -50,7 +53,7 @@ Where it got things wrong:
 
 - A **Windows build** (F-31): a smoke-tested MinGW build first, then CRLF-aware goldens, then
   parity with the Borland release, which needs the old binary or a pilot showroom.
-- Release `2.4` itself: an empty Release "V 2.4" already exists and the workflow refuses to touch it.
+- Prove the tag-push path and "a manual run creates a new tag" at the next real version (F-28, F-32).
 - Pin the actions to commit SHAs, and stop admins bypassing the required check.
 - Cover the orphan-invoice fallbacks (F-20), and automate the showroom notification.
 

@@ -208,11 +208,18 @@ static void stock_menu(void)
 
 /* -------------------------------------------------------- CUSTOMERS */
 
+/* customer type text; ", Fleet" only for fleet customers (TICKET-142, D-10) */
+static const char *type_txt(const CUSTOMER *c)
+{
+    if (c->fleet)
+        return c->type == 'T' ? "Trade, Fleet" : "Retail, Fleet";
+    return c->type == 'T' ? "Trade" : "Retail";
+}
+
 static void print_cust_row(CUSTOMER *c)
 {
     printf("  %-5d %-26.26s %-14s %-28.28s %s\n",
-           c->id, c->name, c->phone, c->email,
-           c->type == 'T' ? "Trade" : "Retail");
+           c->id, c->name, c->phone, c->email, type_txt(c));
 }
 
 static void list_customers(void)
@@ -243,6 +250,7 @@ static void add_customer(void)
     read_line("  Phone  : ", c.phone, sizeof c.phone);
     read_line("  Email  : ", c.email, sizeof c.email);
     c.type = confirm("  Trade customer (Y/N)? ") ? 'T' : 'R';
+    c.fleet = confirm("  Fleet customer (Y/N)? ");
 
     if (c.name[0] == 0) {
         printf("\n  Name is required.\n");
@@ -275,6 +283,36 @@ static void find_customer(void)
     pause_enter();
 }
 
+/* set or clear the fleet flag of an existing customer (TICKET-142, D-09, D-19) */
+static void set_fleet_status(void)
+{
+    CUSTOMER *c;
+    char b[8];
+
+    header("Set Fleet Status");
+    c = find_cust(read_int("  Customer ID : "));
+    if (!c) {
+        printf("\n  Customer not found.\n");
+        pause_enter();
+        return;
+    }
+    printf("\n  Customer : %s (%s)\n", c->name, type_txt(c));
+    printf("  Fleet    : %s\n\n", c->fleet ? "Yes" : "No");
+    read_line("  Fleet customer (Y/N)? ", b, sizeof b);
+    if (b[0] == 'Y' || b[0] == 'y') {
+        c->fleet = 1;
+        save_customers();
+        printf("\n  Customer %d is now a fleet customer.\n", c->id);
+    } else if (b[0] == 'N' || b[0] == 'n') {
+        c->fleet = 0;
+        save_customers();
+        printf("\n  Customer %d is no longer a fleet customer.\n", c->id);
+    } else {
+        printf("\n  Fleet status not changed.\n");
+    }
+    pause_enter();
+}
+
 static void customer_menu(void)
 {
     int opt;
@@ -284,12 +322,14 @@ static void customer_menu(void)
         printf("  1. List customers\n");
         printf("  2. Add customer\n");
         printf("  3. Find customer\n");
+        printf("  4. Set fleet status\n");
         printf("  0. Back\n\n");
         opt = read_int("  Option: ");
         switch (opt) {
         case 1: list_customers(); break;
         case 2: add_customer(); break;
         case 3: find_customer(); break;
+        case 4: set_fleet_status(); break;
         case 0: return;
         default:
             printf("  Invalid option\n");
@@ -323,7 +363,7 @@ static int build_quote(QUOTE *q, VEHICLE **pv, CUSTOMER **pc)
     pct = read_money("  Discount %  : ");
     ti = read_money("  Trade-in    : ");
 
-    calc_quote(q, v->price, c->type, pct, ti);
+    calc_quote(q, v->price, c->type, c->fleet, pct, ti);
     *pv = v;
     *pc = c;
     return 1;
@@ -333,12 +373,14 @@ static void print_quote(const char *title, QUOTE *q, VEHICLE *v, CUSTOMER *c)
 {
     printf("\n  %s\n", title);
     printf("  ----------------------------------------------\n");
-    printf("  Customer : %s (%s)\n", c->name, c->type == 'T' ? "Trade" : "Retail");
+    printf("  Customer : %s (%s)\n", c->name, type_txt(c));
     printf("  Vehicle  : %s %s %s\n", v->plate, v->make, v->model);
     printf("  ----------------------------------------------\n");
     printf("  List price               %12.2f\n", q->list);
     if (q->trade_disc > 0)
         printf("  Trade discount           %12.2f\n", -q->trade_disc);
+    if (q->fleet_disc > 0)
+        printf("  Fleet discount           %12.2f\n", -q->fleet_disc);
     if (q->disc > 0)
         printf("  Discount (%4.1f%%)         %12.2f\n", q->disc_pct, -q->disc);
     printf("  Net price                %12.2f\n", q->net);
@@ -397,7 +439,8 @@ static void sell_vehicle(void)
     i->veh_id = v->id;
     i->cust_id = c->id;
     i->list = q.list;
-    i->disc = q.trade_disc + q.disc;
+    i->disc = q.trade_disc + q.fleet_disc + q.disc;   /* all discounts (D-07) */
+    i->fleet_disc = q.fleet_disc;
     i->net = q.net;
     i->vat = q.vat;
     i->fees = q.delivery + q.reg_fee;
@@ -439,6 +482,7 @@ static void view_invoice(void)
     INVOICE *p = NULL;
     VEHICLE *v;
     CUSTOMER *c;
+    double rem;
 
     header("View Invoice");
     no = read_int("  Invoice no : ");
@@ -458,7 +502,14 @@ static void view_invoice(void)
     printf("  Vehicle  : %s %s %s\n", v ? v->plate : "?", v ? v->make : "", v ? v->model : "");
     printf("  ----------------------------------------------\n");
     printf("  List price               %12.2f\n", p->list);
-    printf("  Discounts                %12.2f\n", -p->disc);
+    if (p->fleet_disc > 0) {
+        /* fleet invoice: other discounts, then the fleet line (D-06, D-18) */
+        rem = rnd2(p->disc - p->fleet_disc);
+        printf("  Discounts                %12.2f\n", rem < 0.005 ? 0.0 : -rem);
+        printf("  Fleet discount           %12.2f\n", -p->fleet_disc);
+    } else {
+        printf("  Discounts                %12.2f\n", -p->disc);
+    }
     printf("  Net price                %12.2f\n", p->net);
     printf("  Fees                     %12.2f\n", p->fees);
     printf("  VAT                      %12.2f\n", p->vat);
@@ -498,6 +549,7 @@ static void help_screen(void)
     printf("  DEALERDESK QUICK HELP\n\n");
     printf("  - Plates are converted to upper case automatically.\n");
     printf("  - Trade customers receive a 5%% trade discount.\n");
+    printf("  - Fleet customers receive an automatic 4%% fleet discount.\n");
     printf("  - Salesman discounts above 10%% require a manager PIN.\n");
     printf("  - Quotes are valid for 7 days.\n");
     printf("  - A sold vehicle cannot be reserved or sold again.\n");

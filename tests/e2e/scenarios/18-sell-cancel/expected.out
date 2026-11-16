@@ -1,0 +1,48 @@
+==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 Sell Vehicle
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  INVOICE PREVIEW
+  ----------------------------------------------
+  Customer : Sarah Whitfield (Retail)
+  Vehicle  : WR21 OLC Toyota Yaris 1.5 Hybrid Icon
+  ----------------------------------------------
+  List price                   16750.00
+  Net price                    16750.00
+  Delivery                       150.00
+  VAT 20%                       3380.00
+  Registration fee                55.00
+  ==============================================
+  TOTAL                        20335.00
+
+  Confirm sale (Y/N)? 
+  Sale cancelled.
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: 
+  Goodbye.
+[exit status: 0]

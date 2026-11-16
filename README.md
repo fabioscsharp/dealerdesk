@@ -77,3 +77,36 @@ See RELEASE.txt
 
 
 Problems: ask Phil (ext. 214).
+
+
+## Build and test (added 2026-11-16)
+
+This section was added later. It supersedes both build commands above. The QUICK START
+command still works; the BUILD command (with `report.c`) does not (see assumptions.md B-10).
+
+From the repository root, on Linux, macOS or WSL with gcc or clang and `make`:
+
+    make                # builds ./dealerdesk
+    make test           # builds, then runs the unit and end-to-end tests
+    make clean          # removes build outputs
+
+`make test` never touches `data/`: every test runs on a temporary copy. See
+`tests/README.md` for how the tests work and how to add one.
+
+
+## Fleet discount (v2.4, added 2026-11-16)
+
+This section was added later. It describes TICKET-142. Where it disagrees with the
+PRICING section above, this section and the code are right.
+
+* Customers can be marked as **fleet**: answer Y to "Fleet customer (Y/N)?" when adding
+  them, or use Customers > 4 "Set fleet status" for an existing customer. That screen
+  changes the flag only on an explicit Y or N.
+* Fleet customers get an automatic **4% fleet discount**. It shows as its own "Fleet
+  discount" line on quotes, invoice previews and invoices.
+* Order: trade discount (10% of list), then fleet discount (4% of list minus trade), then
+  the salesman discount (0-15%, typed) on what is left. Delivery and registration are
+  never discounted. VAT is 20% of net price plus delivery.
+* Non-fleet customers are priced exactly as before.
+* Data files: `customers.dat` has a 6th field (fleet `1`/`0`) and `invoices.dat` a 12th
+  field (fleet discount). Older files load without conversion.

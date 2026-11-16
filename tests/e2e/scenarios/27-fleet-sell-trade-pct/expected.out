@@ -1,0 +1,100 @@
+==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 Sell Vehicle
+==============================================================
+
+  Vehicle ID  :   Customer ID :   Discount %  :   Trade-in    : 
+  INVOICE PREVIEW
+  ----------------------------------------------
+  Customer : Marlow Motors Ltd (Trade, Fleet)
+  Vehicle  : EF66 TRX Mercedes-Benz C220d AMG Line
+  ----------------------------------------------
+  List price                   13495.00
+  Trade discount               -1349.50
+  Fleet discount                -485.82
+  Discount ( 5.0%)              -582.98
+  Net price                    11076.70
+  Delivery                       150.00
+  VAT 20%                       2245.34
+  Registration fee                55.00
+  Trade-in                     -2000.00
+  ==============================================
+  TOTAL                        11527.04
+
+  Confirm sale (Y/N)? 
+  Invoice 50233 created.
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                 View Invoice
+==============================================================
+
+  Invoice no : 
+  INVOICE 50233    Date: <TODAY>
+  ----------------------------------------------
+  Customer : Marlow Motors Ltd
+  Vehicle  : EF66 TRX Mercedes-Benz C220d AMG Line
+  ----------------------------------------------
+  List price                   13495.00
+  Discounts                    -1932.48
+  Fleet discount                -485.82
+  Net price                    11076.70
+  Fees                           205.00
+  VAT                           2245.34
+  Trade-in                     -2000.00
+  ==============================================
+  TOTAL                        11527.04
+
+  Press ENTER to continue...==============================================================
+  DEALERDESK vX.Y                                     Invoices
+==============================================================
+
+  1. List invoices
+  2. View invoice
+  0. Back
+
+  Option: ==============================================================
+  DEALERDESK vX.Y                                    Main Menu
+==============================================================
+
+  1. Stock
+  2. Customers
+  3. Quote
+  4. Sell vehicle
+  5. Invoices
+  9. Help
+  0. Exit
+
+  Option: 
+  Goodbye.
+[exit status: 0]

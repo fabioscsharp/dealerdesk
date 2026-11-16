@@ -47,7 +47,7 @@ void calc_quote(QUOTE *q, double list, char cust_type, int fleet,
 
     q->net = list - q->trade_disc - q->fleet_disc - q->disc;
     q->delivery = 150.00;
-    q->vat = rnd2((q->net + q->delivery) * 0.20);
+    q->vat = rnd2((q->net + q->delivery) * 0.21);
     q->reg_fee = 55.00;
     q->tradein = tradein;
 

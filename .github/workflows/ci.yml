@@ -1,0 +1,60 @@
+# CI (spec 003, FR-001, FR-007). Runs the full check list on every pull request and on every
+# push to master. All logic lives in scripts/check.sh so it can be run locally the same way.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  # One leg per compiler. The legacy code builds with -Wall and without -Werror (Makefile).
+  checks:
+    name: checks (${{ matrix.cc }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+    env:
+      CC: ${{ matrix.cc }}
+    steps:
+      - name: Check out the full history (make test-compat builds a2ba708 from it)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build and run every check
+        run: sh scripts/check.sh
+
+      - name: Keep the built binary (gcc, after a merge to master)
+        if: matrix.cc == 'gcc' && github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dealerdesk-linux-${{ github.sha }}
+          path: dealerdesk
+          if-no-files-found: error
+
+  # The one stable name to mark as the required check on master (see RELEASING.md).
+  # It passes only if every compiler leg above passed.
+  build-and-test:
+    name: build-and-test
+    needs: checks
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    env:
+      CHECKS_RESULT: ${{ needs.checks.result }}
+    steps:
+      - name: Fail unless every compiler leg passed
+        run: |
+          echo "checks result: $CHECKS_RESULT"
+          test "$CHECKS_RESULT" = "success"

@@ -29,3 +29,20 @@ After a rollback, either restore the backup taken above before going back to 2.4
 flag the fleet customers again (Customers > 4) once 2.4 is back.
 
 Release: 2.4
+
+
+UPDATE 2026-11-16 (spec 003): automatic checks and releases
+
+The steps above are unchanged and still apply to deploying on the file server. Building and
+testing are now automatic; see RELEASING.md for the details.
+
+  - Every pull request and every push to master runs the checks (make test, make test-mutation,
+    make test-compat) on GitHub Actions: .github/workflows/ci.yml, or locally: sh scripts/check.sh
+  - A release is made by the Release workflow (.github/workflows/release.yml): push a plain
+    version tag (for example 2.5), or run it by hand from the Actions page with the version.
+    It publishes a GitHub Release with dealerdesk-VERSION.zip (binary and sample data), a
+    SHA256 file and notes. The version must equal the one shown in the app header (screen.c).
+  - That binary is built for Linux. Steps 1 and 2 above (build and test) are now done by the
+    workflows. Steps 3 to 6 (rename to dealerdesk.old, copy the new binary, e-mail the
+    showrooms, roll back) are still done by hand, and BACK UP THE DATA before step 3. The
+    rollback warning for 2.4 above applies to every release after it.

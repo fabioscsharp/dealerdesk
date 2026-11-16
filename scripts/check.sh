@@ -7,6 +7,8 @@
 #   make test          build, unit tests, end-to-end tests
 #   make test-mutation a wrong pricing constant must make the suite fail
 #   make test-compat   the a2ba708 binary still reads the data written now (needs git history)
+#   make test-release  tests of the release scripts (the zip case needs zip; skipped locally
+#                      without it, but never skipped in CI)
 #   clean tree         `git status --porcelain` is the same after the checks as before
 #
 # Honours CC (passed through to make). Exit status 0 only if every step passed.
@@ -34,6 +36,7 @@ before=$(git status --porcelain)
 run "make test" sh -c 'make clean && make test'
 run "make test-mutation" make test-mutation
 run "make test-compat" make test-compat
+run "make test-release" make test-release
 
 echo "== check: clean tree"
 after=$(git status --porcelain)

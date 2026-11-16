@@ -53,3 +53,8 @@ test-mutation:
 
 clean:
 	rm -f dealerdesk *.o $(UNIT)
+
+# Tests for the release scripts (spec 003). Needs zip for the packaging case.
+.PHONY: test-release
+test-release:
+	sh tests/release/test_release.sh

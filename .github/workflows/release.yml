@@ -1,0 +1,73 @@
+# Release (spec 003, FR-002, FR-003, FR-005). Starts from a new version tag, or by hand for a tag
+# that already exists. All logic lives in scripts/ (see RELEASING.md). The Linux binary is built
+# with gcc; Windows is out of scope (F-24, F-31).
+name: Release
+
+on:
+  push:
+    tags: ['[0-9]*.[0-9]*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release, for example 2.4 (plain number, no "v"; must equal the version in screen.c)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+# One release run per version, and a running release is never cancelled.
+concurrency:
+  group: release-${{ github.event.inputs.version || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CC: gcc
+      # The version is untrusted text (a tag name or a typed input). It is only passed in as an
+      # environment variable and used as a quoted shell variable, never written into a script (F-33).
+      VERSION: ${{ github.event.inputs.version || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out the full history (make test-compat builds a2ba708 from it)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check that the version matches the app header
+        run: sh scripts/version.sh --check "$VERSION"
+
+      - name: Refuse to touch an existing release
+        run: |
+          if gh release view "$VERSION" > /dev/null 2>&1; then
+            echo "A GitHub Release for $VERSION already exists; it is never overwritten."
+            exit 1
+          fi
+
+      - name: Build and run every check
+        run: sh scripts/check.sh
+
+      - name: Package the release
+        run: sh scripts/package.sh "$VERSION"
+
+      - name: Write the release notes
+        run: sh scripts/release-notes.sh "$VERSION" > dist/notes.md
+
+      - name: Publish the GitHub Release
+        run: |
+          gh release create "$VERSION" \
+            "dist/dealerdesk-$VERSION.zip" \
+            "dist/dealerdesk-$VERSION.zip.sha256" \
+            --title "DealerDesk $VERSION" \
+            --notes-file dist/notes.md \
+            --target "$GITHUB_SHA"
+
+      - name: Keep a copy with the run
+        uses: actions/upload-artifact@v4
+        with:
+          name: dealerdesk-${{ env.VERSION }}
+          path: dist/
+          if-no-files-found: error
